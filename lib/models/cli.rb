@@ -9,15 +9,17 @@ class CommandLineInterface
         puts 
         puts "Main Menu:"
         puts "(Type in the number of the option you want to select)"
-        puts "1 - See a guest's upcoming show."
-        puts "2 - Add a guest to a show."
-        puts "3 - Update a guest's info."
-        puts "4 - Remove a guest from their show."
-        puts "5 - See an artist's upcoming shows."
-        puts "6 - See all guests above and all guests under 21 years old."
-        puts "7 - See the average age of guests for a specific artist."
         puts 
-        puts "8 - See all guests for a specific artist."
+        puts "1 - View an artist's guest list." 
+        puts "2 - See a guest's upcoming show."
+        puts "3 - Add a guest to a show."
+        puts "4 - Update a guest's info."
+        puts "5 - Remove a guest from their show."
+        puts 
+        puts "6 - See an artist's upcoming shows."
+        puts 
+        puts "7 - See all guests above and all guests under 21 years old."
+        puts "8 - See the average age of guests for a specific artist."
         puts 
         puts "9 - Exit the program."
     end 
@@ -314,9 +316,11 @@ class CommandLineInterface
         else
             guests_array = correct_artist.guests
             names_array = guests_array.map { |guest| guest.name }
+            
+            puts "#{correct_artist.name}'s Guest List:"
+
             i = 0 
-            while i < names_array.length do  
-                puts 
+            while i < names_array.length do
                 puts names_array[i]
                 i += 1 
             end 

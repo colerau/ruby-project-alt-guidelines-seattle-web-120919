@@ -9,11 +9,13 @@ def run_program
         CLI.greet
         CLI.main_menu
         input = get_user_input 
-        if input == "1" 
+        if input == "1"
+            CLI.get_guests_for_an_artist
+        elsif input == "2" 
             CLI.get_guest_show
-        elsif input == "2"
-            CLI.add_guest
         elsif input == "3"
+            CLI.add_guest
+        elsif input == "4"
             puts "What would you like to update?"
             puts "(Type in the number corresponding to your choice)"
             puts 
@@ -25,16 +27,14 @@ def run_program
             elsif update_guest_info_input == "2"
                 CLI.update_guest_favorite_artist
             end 
-        elsif input == "4"
-            CLI.remove_guest
         elsif input == "5"
-            CLI.get_artist_shows
+            CLI.remove_guest
         elsif input == "6"
-            CLI.twenty_one
+            CLI.get_artist_shows
         elsif input == "7"
-            CLI.average_age
+            CLI.twenty_one
         elsif input == "8"
-            CLI.get_guests_for_an_artist
+            CLI.average_age
         elsif input == "9"
             puts "Good bye!"
             exit
