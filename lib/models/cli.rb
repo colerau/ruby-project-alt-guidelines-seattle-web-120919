@@ -29,49 +29,83 @@ class CommandLineInterface
             guest.name
         end[0]
 
-        # GETTING ID'S FOR SHOW AND ARTIST
-        correct_show_id = correct_guest.map do |guest| 
-            guest.show_id
-        end[0]
+        if correct_guest.length == 0 
+            puts 
+            puts "Sorry, that guest is not in our system."
+            puts "Would you like to add them to a show?"
+            puts "(Type \"y\" for yes, \"n\" for no.)"
+            guest_addition_input = get_user_input
+            if guest_addition_input == "y"
+                # Repeated code from #add_guest :( 
+                new_guest_name = users_guest 
+                binding.pry
+                puts "Ok, how old is the guest? "
+                new_guest_age = gets.strip 
+                puts "Who is the guest seeing? "
+                list_artists
+                new_guest_artist = gets.strip
+                puts "What show is the guest attending? "
+                list_shows
+                new_guest_show = gets.strip 
+                Guest.create(
+                    name: new_guest_name, 
+                    age: new_guest_age, 
+                    artist_id: new_guest_artist.to_i, 
+                    show_id: new_guest_show.to_i)
+                
+                new_guest_artist_name = Artist.all.find { |artist| artist.id == new_guest_artist.to_i }
+                new_guest_show_name = Show.all.find { |show| show.id == new_guest_show.to_i}
+                
+                puts 
+                puts "#{new_guest_name} is now seeing #{new_guest_artist_name.name} at #{new_guest_show_name.venue_name}!"
+                # End repeated code from #add_guest 
+            elsif guest_addition_input == "n"
+                puts 
+                puts "Ok!"
+            end 
+        elsif correct_guest.length > 0 
+            # GETTING ID'S FOR SHOW AND ARTIST
+            correct_show_id = correct_guest.map do |guest| 
+                guest.show_id
+            end[0]
 
-        correct_artist_id = correct_guest.map do |guest|
-            guest.artist_id 
-        end[0]
+            correct_artist_id = correct_guest.map do |guest|
+                guest.artist_id 
+            end[0]
 
-        # SHOW
-        correct_show = Show.all.select { |show| show.id == correct_show_id } 
-        
-        displayed_venue_name = correct_show.map do |show| 
-            show.venue_name 
-        end[0]
+            # SHOW
+            correct_show = Show.all.select { |show| show.id == correct_show_id } 
+            
+            displayed_venue_name = correct_show.map do |show| 
+                show.venue_name 
+            end[0]
 
-        displayed_venue_city = correct_show.map do |show|
-            show.venue_city 
-        end[0]
+            displayed_venue_city = correct_show.map do |show|
+                show.venue_city 
+            end[0]
 
-        displayed_venue_state = correct_show.map do |show| 
-            show.venue_state 
-        end[0]
+            displayed_venue_state = correct_show.map do |show| 
+                show.venue_state 
+            end[0]
 
-        displayed_venue_date = correct_show.map do |show|
-            show.date 
-        end[0]
+            displayed_venue_date = correct_show.map do |show|
+                show.date 
+            end[0]
 
-        # ARTIST 
-        correct_artist = Artist.all.select { |artist| artist.id == correct_artist_id } 
+            # ARTIST 
+            correct_artist = Artist.all.select { |artist| artist.id == correct_artist_id } 
 
-        displayed_artist_name = correct_artist.map do |artist|
-            artist.name 
-        end[0]
+            displayed_artist_name = correct_artist.map do |artist|
+                artist.name 
+            end[0]
 
-        # MESSAGE TO USER 
-        puts
-        puts "#{displayed_guest_name}'s upcoming show: "
-        puts "Artist: #{displayed_artist_name}"
-        puts "Venue: #{displayed_venue_name} - #{displayed_venue_city}, #{displayed_venue_state}"
-        puts "Date: #{displayed_venue_date}"
-
-        
+            # MESSAGE TO USER 
+            puts
+            puts "#{displayed_guest_name}'s upcoming show: "
+            puts "Artist: #{displayed_artist_name}"
+            puts "Venue: #{displayed_venue_name} - #{displayed_venue_city}, #{displayed_venue_state}"
+            puts "Date: #{displayed_venue_date}"
+        end 
     end 
 
     def add_guest
@@ -85,7 +119,6 @@ class CommandLineInterface
         puts "What show is the guest attending? "
         list_shows
         new_guest_show = gets.strip 
-        binding.pry
         Guest.create(
             name: new_guest_name, 
             age: new_guest_age, 
@@ -96,7 +129,6 @@ class CommandLineInterface
         new_guest_show_name = Show.all.find { |show| show.id == new_guest_show.to_i}
         
         puts 
-        binding.pry
         puts "#{new_guest_name} is now seeing #{new_guest_artist_name.name} at #{new_guest_show_name.venue_name}!"
     end 
 
@@ -172,3 +204,4 @@ class CommandLineInterface
         puts "#{correct_guest.name} is now removed from their show."
     end 
 end 
+

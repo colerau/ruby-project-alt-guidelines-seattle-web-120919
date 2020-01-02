@@ -25,6 +25,8 @@ while response != "2"
     response = gets.strip 
 end 
 
+puts "Good bye!"
+
 
 
 

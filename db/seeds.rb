@@ -41,5 +41,3 @@ florida_theatre = Show.create(venue_name: "Florida Theatre", venue_city: "Jackso
 the_masquerade = Show.create(venue_name: "The Masquerade", venue_city: "Atlanta", venue_state: "Georgia", date: "12/20/20")
 ford_park = Show.create(venue_name: "Ford Park", venue_city: "Beaumont", venue_state: "Texas", date: "12/21/20")
 
-puts "Seeds are done"
-
