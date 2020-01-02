@@ -29,6 +29,8 @@ def run_program
             CLI.remove_guest
         elsif input == "5"
             CLI.get_artist_shows
+        elsif input == "6"
+            CLI.twenty_one
         elsif input == "8"
             puts "Good bye!"
             exit

@@ -14,6 +14,7 @@ class CommandLineInterface
         puts "3 - Update a guest's info."
         puts "4 - Remove a guest from their show."
         puts "5 - See an artist's upcoming shows."
+        puts "6 - See all guests above and all guests under 21 years old."
         puts "8 - Exit the program."
     end 
 
@@ -247,6 +248,36 @@ class CommandLineInterface
                 puts "#{show_array[i].venue_name}"
                 i += 1
             end 
+        end 
+    end 
+
+    # Gets all guests at, above, and under 21 years old
+    def twenty_one
+        puts 
+        puts "Guests 21 years of age or older:"
+        puts 
+        guests_over_twenty_one = Guest.all.find_by_sql ["SELECT * FROM guests WHERE age >= ? ORDER BY age", 21]
+        guest_over_twenty_one_name = guests_over_twenty_one.map { |guest| guest.name }
+        guest_over_twenty_one_age = guests_over_twenty_one.map { |guest| guest.age }
+        i = 0 
+        while i < guests_over_twenty_one.length do 
+            puts "#{guest_over_twenty_one_name[i]}, age #{guest_over_twenty_one_age[i]}"
+            i += 1
+        end 
+        puts
+        puts 
+        puts 
+        puts 
+        puts 
+        puts "Guests under 21 years old:"
+        puts 
+        guests_under_twenty_one = Guest.all.find_by_sql ["SELECT * FROM guests WHERE age < ? ORDER BY age", 21]
+        guest_under_twenty_one_name = guests_under_twenty_one.map { |guest| guest.name }
+        guest_under_twenty_one_age = guests_under_twenty_one.map { |guest| guest.age }
+        i = 0 
+        while i < guests_under_twenty_one.length do 
+            puts "#{guest_under_twenty_one_name[i]}, age #{guest_under_twenty_one_age[i]}"
+            i += 1
         end 
     end 
 end 
