@@ -15,7 +15,11 @@ class CommandLineInterface
         puts "4 - Remove a guest from their show."
         puts "5 - See an artist's upcoming shows."
         puts "6 - See all guests above and all guests under 21 years old."
-        puts "8 - Exit the program."
+        puts "7 - See the average age of guests for a specific artist."
+        puts 
+        puts "8 - See all guests for a specific artist."
+        puts 
+        puts "9 - Exit the program."
     end 
 
     def get_user_input
@@ -278,6 +282,44 @@ class CommandLineInterface
         while i < guests_under_twenty_one.length do 
             puts "#{guest_under_twenty_one_name[i]}, age #{guest_under_twenty_one_age[i]}"
             i += 1
+        end 
+    end 
+
+    # Gets the average age of guests for a specific artist 
+    def average_age 
+        puts 
+        puts "Which artist? "
+        user_artist = gets.strip 
+        correct_artist = Artist.all.find_by(name: user_artist)
+        if !correct_artist
+            puts "Sorry, that artist is not in our system."
+        else
+            guests_array = correct_artist.guests
+            ages_array = guests_array.map { |guest| guest.age }
+            numerator = (ages_array.reduce(0) { |a, v| a + v }).to_f
+            denominator = ages_array.length 
+            average_age = numerator / denominator
+            puts 
+            puts "Average age of guests: #{average_age} years old."
+        end 
+    end 
+
+    def get_guests_for_an_artist
+        puts 
+        puts "Which artist? "
+        user_artist = gets.strip 
+        correct_artist = Artist.all.find_by(name: user_artist)
+        if !correct_artist
+            puts "Sorry, that artist is not in our system."
+        else
+            guests_array = correct_artist.guests
+            names_array = guests_array.map { |guest| guest.name }
+            i = 0 
+            while i < names_array.length do  
+                puts 
+                puts names_array[i]
+                i += 1 
+            end 
         end 
     end 
 end 

@@ -31,7 +31,11 @@ def run_program
             CLI.get_artist_shows
         elsif input == "6"
             CLI.twenty_one
+        elsif input == "7"
+            CLI.average_age
         elsif input == "8"
+            CLI.get_guests_for_an_artist
+        elsif input == "9"
             puts "Good bye!"
             exit
         end 
