@@ -13,6 +13,7 @@ class CommandLineInterface
         puts "2 - Add a guest to a show."
         puts "3 - Update a guest's info."
         puts "4 - Remove a guest from their show."
+        puts "5 - Exit the program."
     end 
 
     def get_user_input
@@ -40,6 +41,8 @@ class CommandLineInterface
                 new_guest_name = users_guest
                 puts "Ok, how old is the guest? "
                 new_guest_age = gets.strip 
+                puts "Who is the guest's favorite artist?"
+                new_guest_favorite_artist = gets.strip
                 puts "Who is the guest seeing? "
                 list_artists
                 new_guest_artist = gets.strip
@@ -50,7 +53,8 @@ class CommandLineInterface
                     name: new_guest_name, 
                     age: new_guest_age, 
                     artist_id: new_guest_artist.to_i, 
-                    show_id: new_guest_show.to_i)
+                    show_id: new_guest_show.to_i,
+                    favorite_artist: new_guest_favorite_artist)
                 
                 new_guest_artist_name = Artist.all.find { |artist| artist.id == new_guest_artist.to_i }
                 new_guest_show_name = Show.all.find { |show| show.id == new_guest_show.to_i}
@@ -112,6 +116,8 @@ class CommandLineInterface
         new_guest_name = gets.strip
         puts "How old is the guest? "
         new_guest_age = gets.strip 
+        puts "Who is the guest's favorite artist?"
+        new_guest_favorite_artist = gets.strip
         puts "Who is the guest seeing? "
         list_artists
         new_guest_artist = gets.strip
@@ -122,7 +128,8 @@ class CommandLineInterface
             name: new_guest_name, 
             age: new_guest_age, 
             artist_id: new_guest_artist.to_i, 
-            show_id: new_guest_show.to_i)
+            show_id: new_guest_show.to_i,
+            favorite_artist: new_guest_favorite_artist)
         
         new_guest_artist_name = Artist.all.find { |artist| artist.id == new_guest_artist.to_i }
         new_guest_show_name = Show.all.find { |show| show.id == new_guest_show.to_i}

@@ -27,6 +27,9 @@ def run_program
             end 
         elsif input == "4"
             CLI.remove_guest
+        elsif input == "5"
+            puts "Good bye!"
+            exit
         end 
         puts 
         puts "What would you like to do now?"
