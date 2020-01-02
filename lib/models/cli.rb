@@ -37,8 +37,7 @@ class CommandLineInterface
             guest_addition_input = get_user_input
             if guest_addition_input == "y"
                 # Repeated code from #add_guest :( 
-                new_guest_name = users_guest 
-                binding.pry
+                new_guest_name = users_guest
                 puts "Ok, how old is the guest? "
                 new_guest_age = gets.strip 
                 puts "Who is the guest seeing? "
