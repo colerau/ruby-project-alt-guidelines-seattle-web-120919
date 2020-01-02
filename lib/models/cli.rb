@@ -11,7 +11,7 @@ class CommandLineInterface
         puts "(Type in the number of the option you want to select)"
         puts "1 - See a guest's upcoming show."
         puts "2 - Add a guest to a show."
-        puts "3 - Update a guest's age."
+        puts "3 - Update a guest's info."
         puts "4 - Remove a guest from their show."
     end 
 
@@ -176,6 +176,18 @@ class CommandLineInterface
         new_age = gets.strip 
         correct_guest.update(age: new_age)
         puts "The guest's new age is #{correct_guest.age}."
+    end 
+
+    def update_guest_favorite_artist 
+        puts 
+        puts "Please choose which guest to update: "
+        list_guests 
+        guest_id_input = gets.strip 
+        correct_guest = Guest.find_by(id: guest_id_input.to_i)
+        puts "What is the guest's new favorite artist?"
+        new_favorite_artist = gets.strip 
+        correct_guest.update(favorite_artist: new_favorite_artist)
+        puts "The guest's new favorite artist is #{correct_guest.favorite_artist}."
     end 
     
     # LIST ALL GUESTS 
