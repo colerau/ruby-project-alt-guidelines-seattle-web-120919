@@ -2,6 +2,10 @@ class CommandLineInterface
     def greet 
         puts 
         puts 
+        puts
+        puts 
+        puts 
+        puts 
         puts "Welcome to..."
     end 
 
@@ -24,8 +28,8 @@ class CommandLineInterface
         puts 
         puts "6 - See an artist's upcoming shows."
         puts 
-        puts "7 - See all guests above and all guests under 21 years old."
-        puts "8 - See the average age of guests for a specific artist."
+        puts "7 - See which guests are 21 or older."
+        puts "8 - See the average age of guests for an artist."
         puts 
         puts "9 - Exit the program."
     end 
@@ -35,7 +39,8 @@ class CommandLineInterface
         user_input = gets.strip
     end 
 
-    def get_guest_show
+    def get_guest_show 
+        puts 
         puts "Please enter the name of a guest: "
         puts 
         users_guest = gets.strip
@@ -56,16 +61,24 @@ class CommandLineInterface
             if guest_addition_input == "y"
                 # Repeated code from #add_guest :( 
                 new_guest_name = users_guest
+                puts 
+                puts 
                 puts "Ok, how old is the guest? "
                 puts
                 new_guest_age = gets.strip 
+                puts 
+                puts 
                 puts "Who is the guest's favorite artist?"
                 puts 
                 new_guest_favorite_artist = gets.strip
+                puts 
+                puts 
                 puts "Who is the guest seeing? "
                 list_artists
                 puts 
                 new_guest_artist = gets.strip
+                puts 
+                puts 
                 puts "What show is the guest attending? "
                 list_shows
                 puts 
@@ -133,20 +146,30 @@ class CommandLineInterface
     end 
 
     def add_guest
+        puts 
+        puts 
         puts "What is the guest's name? "
         puts 
         new_guest_name = gets.strip
+        puts 
+        puts 
         puts "How old is the guest? "
         puts 
         new_guest_age = gets.strip 
+        puts 
+        puts 
         puts "Who is the guest's favorite artist?"
         puts 
         new_guest_favorite_artist = gets.strip
+        puts 
+        puts
         puts "Who is the guest seeing? "
         list_artists
         puts 
         new_guest_artist = gets.strip
-        puts "What show is the guest attending? "
+        puts 
+        puts 
+        puts "Which show is the guest attending? "
         list_shows
         puts 
         new_guest_show = gets.strip 
@@ -205,10 +228,12 @@ class CommandLineInterface
         puts 
         guest_id_input = gets.strip 
         correct_guest = Guest.find_by(id: guest_id_input.to_i)
+        puts 
         puts "What is the guest's new age?"
         puts 
         new_age = gets.strip 
         correct_guest.update(age: new_age)
+        puts 
         puts "The guest's new age is #{correct_guest.age}.".green
     end 
 
@@ -219,10 +244,12 @@ class CommandLineInterface
         puts 
         guest_id_input = gets.strip 
         correct_guest = Guest.find_by(id: guest_id_input.to_i)
+        puts 
         puts "What is the guest's new favorite artist?"
         puts 
         new_favorite_artist = gets.strip 
         correct_guest.update(favorite_artist: new_favorite_artist)
+        puts 
         puts "The guest's new favorite artist is #{correct_guest.favorite_artist}.".green
     end 
     
@@ -250,32 +277,33 @@ class CommandLineInterface
         guest_id_input = gets.strip 
         correct_guest = Guest.find_by(id: guest_id_input.to_i)
         correct_guest.destroy
+        puts 
         puts "#{correct_guest.name} is now removed from their show.".green
     end 
 
     def get_artist_shows 
+        puts 
         puts "Please enter the name of an artist: "
         puts 
         users_artist = gets.strip
 
         # if found, by default, correct_artist is an object not stored in an array
         correct_artist = Artist.all.find_by(name: users_artist)
-        array = []
-        array << correct_artist
-
-        if array.length == 0 
+        if !correct_artist 
+            puts 
             puts "Sorry, that artist isn't in our system.".blue
-        elsif array.length > 0 
+        else
             show_array = correct_artist.shows
             if show_array.uniq.length == 1
+                puts 
                 puts "#{correct_artist.name}'s upcoming show: ".green
             elsif show_array.uniq.length > 1 
+                puts 
                 puts "#{correct_artist.name}'s upcoming shows: ".green
             end 
-            puts
             i = 0 
             while i < show_array.uniq.length 
-                puts "#{show_array[i].venue_name}"
+                puts "#{show_array[i].venue_name}".green
                 i += 1
             end 
         end 
@@ -284,7 +312,7 @@ class CommandLineInterface
     # Gets all guests at, above, and under 21 years old
     def twenty_one
         puts 
-        puts "Guests 21 years of age or older:".green
+        puts "Guests 21 or older:".green
         puts 
         guests_over_twenty_one = Guest.all.find_by_sql ["SELECT * FROM guests WHERE age >= ? ORDER BY age", 21]
         guest_over_twenty_one_name = guests_over_twenty_one.map { |guest| guest.name }
@@ -299,7 +327,7 @@ class CommandLineInterface
         puts 
         puts 
         puts 
-        puts "Guests under 21 years old:".red
+        puts "Guests under 21:".red
         puts 
         guests_under_twenty_one = Guest.all.find_by_sql ["SELECT * FROM guests WHERE age < ? ORDER BY age", 21]
         guest_under_twenty_one_name = guests_under_twenty_one.map { |guest| guest.name }
@@ -319,6 +347,7 @@ class CommandLineInterface
         user_artist = gets.strip 
         correct_artist = Artist.all.find_by(name: user_artist)
         if !correct_artist
+            puts 
             puts "Sorry, that artist is not in our system.".blue 
         else
             guests_array = correct_artist.guests
@@ -334,15 +363,17 @@ class CommandLineInterface
     def get_guests_for_an_artist
         puts 
         puts "Which artist? "
-        puts
+        puts 
         user_artist = gets.strip 
         correct_artist = Artist.all.find_by(name: user_artist)
         if !correct_artist
+            puts 
             puts "Sorry, that artist is not in our system.".blue
         else
             guests_array = correct_artist.guests
             names_array = guests_array.map { |guest| guest.name }
             
+            puts
             puts "#{correct_artist.name}'s Guest List:".green
 
             i = 0 
