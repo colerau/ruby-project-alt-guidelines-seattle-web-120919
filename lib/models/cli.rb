@@ -13,7 +13,8 @@ class CommandLineInterface
         puts "2 - Add a guest to a show."
         puts "3 - Update a guest's info."
         puts "4 - Remove a guest from their show."
-        puts "5 - Exit the program."
+        puts "5 - See an artist's upcoming shows."
+        puts "8 - Exit the program."
     end 
 
     def get_user_input
@@ -220,6 +221,33 @@ class CommandLineInterface
         correct_guest = Guest.find_by(id: guest_id_input.to_i)
         correct_guest.destroy
         puts "#{correct_guest.name} is now removed from their show."
+    end 
+
+    def get_artist_shows 
+        puts "Please enter the name of an artist: "
+        users_artist = gets.strip
+
+        # if found, by default, correct_artist is an object not stored in an array
+        correct_artist = Artist.all.find_by(name: users_artist)
+        array = []
+        array << correct_artist
+
+        if array.length == 0 
+            puts "Sorry, that artist isn't in our system."
+        elsif array.length > 0 
+            show_array = correct_artist.shows
+            if show_array.uniq.length == 1
+                puts "#{correct_artist.name}'s upcoming show: "
+            elsif show_array.uniq.length > 1 
+                puts "#{correct_artist.name}'s upcoming shows: "
+            end 
+            puts
+            i = 0 
+            while i < show_array.uniq.length 
+                puts "#{show_array[i].venue_name}"
+                i += 1
+            end 
+        end 
     end 
 end 
 
