@@ -2,7 +2,7 @@
 
 ## Guest List is a program for record labels to manage each of their touring artists' guests.
 
-
+### [Video Walkthrough](https://www.youtube.com/watch?v=P47zzHsZQMY) 
 ### How to Install: 
 1. Fork and clone this repository. 
 ### How to Run: 
