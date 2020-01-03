@@ -20,11 +20,13 @@ class CommandLineInterface
         puts "Main Menu:"
         puts "(Type in the number of the option you want to select)"
         puts 
-        puts "1 - View an artist's guest list." 
+        puts "1 - View an artist's guest list.".yellow
+        puts 
         puts "2 - See a guest's upcoming show."
-        puts "3 - Add a guest to a show."
-        puts "4 - Update a guest's info."
-        puts "5 - Remove a guest from their show."
+        puts 
+        puts "3 - Add a guest to an artist's guest list.".yellow
+        puts "4 - Update a guest's info.".yellow
+        puts "5 - Remove a guest from their show.".yellow
         puts 
         puts "6 - See an artist's upcoming shows."
         puts 
