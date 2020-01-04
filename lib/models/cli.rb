@@ -316,7 +316,7 @@ class CommandLineInterface
         puts 
         puts "Guests 21 or older:".green
         puts 
-        guests_over_twenty_one = Guest.all.find_by_sql ["SELECT * FROM guests WHERE age >= ? ORDER BY age", 21]
+        guests_over_twenty_one = Guest.all.find_by_sql ["SELECT * FROM guests WHERE age >= ? ORDER BY name", 21]
         guest_over_twenty_one_name = guests_over_twenty_one.map { |guest| guest.name }
         guest_over_twenty_one_age = guests_over_twenty_one.map { |guest| guest.age }
         i = 0 
@@ -331,7 +331,7 @@ class CommandLineInterface
         puts 
         puts "Guests under 21:".red
         puts 
-        guests_under_twenty_one = Guest.all.find_by_sql ["SELECT * FROM guests WHERE age < ? ORDER BY age", 21]
+        guests_under_twenty_one = Guest.all.find_by_sql ["SELECT * FROM guests WHERE age < ? ORDER BY name", 21]
         guest_under_twenty_one_name = guests_under_twenty_one.map { |guest| guest.name }
         guest_under_twenty_one_age = guests_under_twenty_one.map { |guest| guest.age }
         i = 0 
